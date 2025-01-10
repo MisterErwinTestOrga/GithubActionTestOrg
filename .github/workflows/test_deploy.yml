@@ -32,5 +32,5 @@ jobs:
       needs: [ a ]
       uses: MisterErwinTestOrga/.github/.github/workflows/test_trigger_downstream.yml@main
       with:
-        projects: toJSON([ 'MontiCore/cd4analysis', 'MontiCore/feature-diagram', 'MontiCore/xml', 'MontiCore/json', 'MontiCore/ucd', 'MontiCore/automaton' ])
+        projects: toJSON([ "MontiCore/cd4analysis", 'MontiCore/feature-diagram', 'MontiCore/xml', 'MontiCore/json', 'MontiCore/ucd', 'MontiCore/automaton' ])
       secrets: inherit
