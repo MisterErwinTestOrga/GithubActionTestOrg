@@ -1,0 +1,43 @@
+# (c) https://github.com/MontiCore/monticore
+
+name: Monti Gradle Build & Deploy
+
+concurrency: # run this test workflow only once per "branch"
+  group: ${{ github.repository }}-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  push: # run this test pipeline on every push
+    paths-ignore:
+      - "*.md"
+    branches: [ "main" ] # Only run on the default branch
+
+env:
+  GRADLE_VERSION: 7.4 # Gradle version used
+  GRADLE_CLI_OPTS: "-Pci --build-cache " # CLI option passed to Gradle
+  GRADLE_BUILD_ACTION_CACHE_KEY_JOB: "test-cache-${{ github.head_ref }}.${{ github.sha }}"
+
+permissions:
+  contents: read
+
+jobs:
+    a:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Deploy
+            run: echo deploy
+
+    # Trigger GitHub downstream projects (without reporting the pipeline result)
+    trigger-github-downstream:
+      needs: [ a ]
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          project: [ "MontiCore/cd4analysis", "MontiCore/feature-diagram", "MontiCore/xml", "MontiCore/json", "MontiCore/ucd", "MontiCore/automaton" ]
+      steps:
+        - name: Trigger ${{ matrix.project }}
+          uses: peter-evans/repository-dispatch@v3
+          with:
+            token: ${{ secrets.DOWNSTREAM_PAT }}
+            repository: ${{ matrix.project }}
+            event-type: trigger_after_upstream_deploy
