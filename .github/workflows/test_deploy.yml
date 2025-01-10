@@ -30,14 +30,7 @@ jobs:
     # Trigger GitHub downstream projects (without reporting the pipeline result)
     trigger-github-downstream:
       needs: [ a ]
-      runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          project: []
-      steps:
-        - name: Trigger ${{ matrix.project }}
-          uses: peter-evans/repository-dispatch@v3
-          with:
-            token: ${{ secrets.DOWNSTREAM_PAT }}
-            repository: ${{ matrix.project }}
-            event-type: trigger_after_upstream_deploy
+      uses: MisterErwinTestOrga/.github/.github/workflows/test_trigger_downstream.yml@main
+      with:
+        projects: toJSON([ 'MontiCore/cd4analysis', 'MontiCore/feature-diagram', 'MontiCore/xml', 'MontiCore/json', 'MontiCore/ucd', 'MontiCore/automaton' ])
+      secrets: inherit
