@@ -33,7 +33,7 @@ jobs:
       runs-on: ubuntu-latest
       strategy:
         matrix:
-          project: [ "MontiCore/cd4analysis", "MontiCore/feature-diagram", "MontiCore/xml", "MontiCore/json", "MontiCore/ucd", "MontiCore/automaton" ]
+          project: []
       steps:
         - name: Trigger ${{ matrix.project }}
           uses: peter-evans/repository-dispatch@v3
