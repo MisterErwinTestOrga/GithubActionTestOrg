@@ -29,7 +29,7 @@ jobs:
 
     # Run the MontiVerse pipeline (tests this change on a suite of projects)
     trigger-montiverse:
-      uses: MisterErwinTestOrga/.github/.github/workflows/gradle_mc_branch.yml@main
+      uses: MisterErwinTestOrga/.github/.github/workflows/test_mv.yml@main
       with:
         project: "MONTICORE"
         branch: github.event.push.ref
