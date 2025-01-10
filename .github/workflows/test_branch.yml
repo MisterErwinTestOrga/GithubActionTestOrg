@@ -1,0 +1,37 @@
+# (c) https://github.com/MontiCore/monticore
+
+name: Monti Gradle Build & Test
+
+concurrency: # run this test workflow only once per "branch"
+  group: ${{ github.repository }}-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  push: # run this test pipeline on every push
+    paths-ignore:
+      - "*.md"
+    branches-ignore: [ "main" ] # do not run these tests on the default branch
+
+env:
+  GRADLE_VERSION: 7.4 # Gradle version used
+  GRADLE_CLI_OPTS: "-Pci --build-cache " # CLI option passed to Gradle
+  GRADLE_BUILD_ACTION_CACHE_KEY_JOB: "test-cache-${{ github.head_ref }}.${{ github.sha }}"
+
+permissions:
+  contents: read # This action may run somewhat unsafe code
+
+jobs:
+    a:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Test
+            run: echo Works
+
+    # Run the MontiVerse pipeline (tests this change on a suite of projects)
+    trigger-montiverse:
+      uses: MisterErwinTestOrga/.github/.github/workflows/gradle_mc_branch.yml@main
+      with:
+        project: "MONTICORE"
+        branch: github.event.push.ref
+        repo: github.event.push.repository.full_name
+      secrets: inherit
