@@ -35,5 +35,5 @@ jobs:
       needs: [ deploy ]
       uses: MisterErwinTestOrga/.github/.github/workflows/test_trigger_downstream.yml@main
       with:
-        projects: "(['MontiCore/cd4analysis', 'MontiCore/feature-diagram', 'MontiCore/xml', 'MontiCore/json', 'MontiCore/ucd', 'MontiCore/automaton' ])"
+        projects: "['MontiCore/cd4analysis', 'MontiCore/feature-diagram', 'MontiCore/xml', 'MontiCore/json', 'MontiCore/ucd', 'MontiCore/automaton' ]"
       secrets: inherit
