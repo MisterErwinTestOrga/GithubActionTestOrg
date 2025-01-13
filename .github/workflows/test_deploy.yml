@@ -17,9 +17,10 @@ env:
   GRADLE_VERSION: 7.4 # Gradle version used
   GRADLE_CLI_OPTS: "-Pci --build-cache " # CLI option passed to Gradle
   GRADLE_BUILD_ACTION_CACHE_KEY_JOB: "test-cache-${{ github.head_ref }}.${{ github.sha }}"
-
 permissions:
   contents: read
+
+
 
 jobs:
     deploy:
@@ -33,5 +34,5 @@ jobs:
       needs: [ deploy ]
       uses: MisterErwinTestOrga/.github/.github/workflows/test_trigger_downstream.yml@main
       with:
-        projects: toJSON([ "MontiCore/cd4analysis", 'MontiCore/feature-diagram', 'MontiCore/xml', 'MontiCore/json', 'MontiCore/ucd', 'MontiCore/automaton' ])
+        projects: "(['MontiCore/cd4analysis', 'MontiCore/feature-diagram', 'MontiCore/xml', 'MontiCore/json', 'MontiCore/ucd', 'MontiCore/automaton' ])"
       secrets: inherit
