@@ -21,7 +21,7 @@ permissions:
   contents: read
 
 jobs:
-    a:
+    deploy:
         runs-on: ubuntu-latest
         steps:
           - name: Deploy
@@ -29,7 +29,7 @@ jobs:
 
     # Trigger GitHub downstream projects (without reporting the pipeline result)
     trigger-github-downstream:
-      needs: [ a ]
+      needs: [ deploy ]
       uses: MisterErwinTestOrga/.github/.github/workflows/test_trigger_downstream.yml@main
       with:
         projects: toJSON([ "MontiCore/cd4analysis", 'MontiCore/feature-diagram', 'MontiCore/xml', 'MontiCore/json', 'MontiCore/ucd', 'MontiCore/automaton' ])
