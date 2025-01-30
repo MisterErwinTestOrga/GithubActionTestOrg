@@ -1,5 +1,5 @@
 # (c) https://github.com/MontiCore/monticore
-# test test test
+# test test test test
 
 name: Monti Gradle Build & Test
 
@@ -26,7 +26,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - name: Test
-            run: echo Works
+            run: echo Works on  ${{ github.event.push.head.ref }} with ${{ github.event.push.repository.full_name }}
 
     # Run the MontiVerse pipeline (tests this change on a suite of projects)
     trigger-montiverse:
