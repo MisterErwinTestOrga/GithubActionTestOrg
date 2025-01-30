@@ -26,7 +26,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - name: Test
-            run: echo Works on  ${{ github.event.push.head.ref }} with ${{ github.event.push.repository.full_name }} vs ${{github.event.repository.full_name }}
+            run: echo Works on ${{ github.event.payload.ref }} v ${{ github.event.ref }} x ${{ github.event.push.head.ref }} with ${{ github.event.push.repository.full_name }} vs ${{github.event.repository.full_name }}
 
     # Run the MontiVerse pipeline (tests this change on a suite of projects)
     trigger-montiverse:
