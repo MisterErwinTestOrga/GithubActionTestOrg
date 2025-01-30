@@ -26,13 +26,13 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - name: Test
-            run: echo Works on  ${{ github.event.push.head.ref }} with ${{ github.event.push.repository.full_name }}
+            run: echo Works on  ${{ github.event.push.head.ref }} with ${{ github.event.push.repository.full_name }} vs ${{github.event.repository.full_name }}
 
     # Run the MontiVerse pipeline (tests this change on a suite of projects)
     trigger-montiverse:
       uses: MisterErwinTestOrga/.github/.github/workflows/test_mv.yml@main
       with:
         project: "MONTICORE"
-        branch: ${{ github.event.push.head.ref }}
-        repo: ${{ github.event.push.repository.full_name }}
+        branch: ${{ github.event.head.ref }}
+        repo: ${{ github.event.repository.full_name }}
       secrets: inherit
