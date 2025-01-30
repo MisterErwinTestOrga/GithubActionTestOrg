@@ -33,6 +33,6 @@ jobs:
       uses: MisterErwinTestOrga/.github/.github/workflows/test_mv.yml@main
       with:
         project: "MONTICORE"
-        branch: ${{ github.event.payload.ref }}
+        branch: ${{ github.event.ref }}
         repo: ${{ github.event.repository.full_name }}
       secrets: inherit
