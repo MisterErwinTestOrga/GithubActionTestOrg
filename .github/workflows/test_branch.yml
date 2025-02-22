@@ -12,6 +12,7 @@ on:
     paths-ignore:
       - "*.md"
     branches-ignore: [ "main" ] # do not run these tests on the default branch
+  workflow_dispatch:
 
 env:
   GRADLE_VERSION: 7.4 # Gradle version used
