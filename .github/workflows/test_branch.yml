@@ -1,5 +1,5 @@
 # (c) https://github.com/MontiCore/monticore
-# test test test
+# test test test test test test test test t
 
 name: Monti Gradle Build & Test
 
@@ -12,6 +12,7 @@ on:
     paths-ignore:
       - "*.md"
     branches-ignore: [ "main" ] # do not run these tests on the default branch
+  workflow_dispatch:
 
 env:
   GRADLE_VERSION: 7.4 # Gradle version used
@@ -29,10 +30,19 @@ jobs:
             run: echo Works
 
     # Run the MontiVerse pipeline (tests this change on a suite of projects)
+    #trigger-montiverse:
+    #  uses: MisterErwinTestOrga/.github/.github/workflows/test_mv.yml@main
+    #  with:
+    #    project: "MONTICORE"
+    #    branch: ${{ github.event.push.head.ref }}
+    #    repo: ${{ github.event.push.repository.full_name }}
+    #  secrets: inherit
+    # Run the MontiVerse pipeline (tests this change on a suite of projects)
     trigger-montiverse:
-      uses: MisterErwinTestOrga/.github/.github/workflows/test_mv.yml@main
+      uses: MisterErwinTestOrga/.github/.github/workflows/callable.yml@main
       with:
-        project: "MONTICORE"
-        branch: ${{ github.event.push.head.ref }}
-        repo: ${{ github.event.push.repository.full_name }}
+        a: "a"
       secrets: inherit
+      permissions:
+        contents: write
+        pull-requests: write
