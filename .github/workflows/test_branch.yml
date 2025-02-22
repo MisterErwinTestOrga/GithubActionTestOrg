@@ -43,3 +43,6 @@ jobs:
       with:
         a: "a"
       secrets: inherit
+      permissions:
+        contents: write
+        pull-requests: write
